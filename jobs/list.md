@@ -1,16 +1,16 @@
 # Job: list
 
-Decide who could sit in the room. Quality over number.
+Who belongs on which agent's list.
 
 ## Read first
-- `context/owner.md` (if it is missing, say "practice" at the top of the daily file and use made-up people in `data/practice.csv` only).
-- `repo/playbook/PATH.md`, what makes a fit. `python3 repo/tools/council.py stats --days 7`.
+- `context/owner.md` (missing: put "practice" at the top of the daily file and use made-up people in `data/practice.csv` only), `repo/playbook/PATH.md` (what makes a fit), `repo/playbook/FUNCTIONS.md`.
+- `python3 repo/tools/team.py inbox cold-email`, `python3 repo/tools/people.py stats --days 7`.
 
 ## Do
-1. **The owner's own people first.** For every file in `data/contacts/` not yet in `state/imported.txt`: `python3 repo/tools/council.py import <file> --source "<what it is>"`, then add its name to that file. The sources that work best: people the owner met, alumni and member directories the owner belongs to, past clients' IT providers, the owner's own newsletter.
-2. **Score** up to 25 people with no fit yet (`council.py list --stage listed`): `council.py fit <id> <0-5> "<reason>"`. 5 runs an MSP and brings something the room lacks; 3 runs one; 1 is adjacent; 0 is not a fit (then `council.py stage <id> later "not a fit"`). Use what the list says and their public website. No paid data, nothing guessed.
-3. **Only if fewer than 10 people are listed at 4 or 5:** up to 5 new ones from public pages (MSP community speakers, podcast guests, chapter leaders, association boards), each with the page in `--why`. `council.py add --name ... --company ... --linkedin ... --source "<page>" --why "<reason>"`.
-4. **Gaps.** Which verticals, specialties and regions the joined and offered people cover, and which are missing.
+1. **The owner's own people first.** For every file in `data/contacts/` not yet in `state/imported.txt`: `people.py import <file> --source "<what it is>"`, then add its name to that file.
+2. **Score and place** up to 25 people with no fit or no lane: `people.py fit <id> <0-5> "<reason>"`, then `people.py lane <id> <role>`: dream-100 for the few where one yes changes everything; dream-500 for a strong fit; partners for someone whose audience is the buyers; cold-email for the rest of the fits. 0 is not a fit: `people.py stage <id> later "not a fit"`. Use what the list says and their public website. No paid data, nothing guessed.
+3. **Orders** in your inbox: fill from the list first, then public pages (member directories, association boards, event speakers, community leaders), up to ten new people a day, each with the page in `--why`.
+4. `team.py taken <file>` for each order filled.
 
 ## Write
-`daily/<today>/list.md`: how many added, scored and at 4 or 5 (counts and ids); the gaps; the five to invite next, by id, with the reason.
+`daily/<today>/list.md`: added, scored and placed by lane (counts and ids), orders filled and open.

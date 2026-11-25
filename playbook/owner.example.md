@@ -19,6 +19,8 @@ Copy this file to context/owner.md and fill in what is known. One `key: value` o
 - booking_link:
 - sender_email:
 - linkedin:
+- website:
 - topics:
+- communities:
 - never_invite:
 - signature:

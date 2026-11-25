@@ -1,34 +1,36 @@
 # MSP Mastermind: GrokBot pack
 
-One Grok bot that gets people signed up for a mastermind of managed service provider owners, and keeps the ones who join.
+A Revenue OS team of ten Grok bots: a lead, and one bot for each of the nine functions. The team fills a mastermind of managed service provider owners, one person at a time, and keeps the ones who join.
 
-**Install:** paste this into one new Grok bot.
+**Install or update:** one line each, in [INSTALL.md](INSTALL.md). Version 2.0.0. The pack holds no names, prices or lists: the team takes those from you.
 
-> Install the MSP Mastermind bot. Download https://github.com/jbellsolutions/msp-mastermind-grokbot/releases/latest/download/msp-mastermind.zip, unpack it into /workspace/msp-mastermind/repo/, run python3 /workspace/msp-mastermind/repo/tools/install.py and do what it prints, in order. Ask me nothing until it is all done, then send me one message that ends with the checklist. Nothing sends or posts until I say yes.
+## The team
 
-Version 1.0.0. The pack holds no names, prices or lists: the bot takes those from you in chat.
-
-## How it works
-
-The bot only orchestrates. Each routine hands one job to the **Claude Code CLI** (`tools/job.py`), with the **Codex CLI** as the second engine, so the work runs on your own subscriptions and not on Grok usage.
-
-| Job | What it does | When (UTC) |
+| Agent | What it does | Thinks with |
 |---|---|---|
-| [list](jobs/list.md) | Who belongs in the room: your own people first, scored with a reason | 12:10 weekdays |
-| [invite](jobs/invite.md) | First messages and short follow-ups, one person at a time | 13:10 weekdays |
-| [replies](jobs/replies.md) | Every reply answered in draft and moved one step | 12:40, 15:40, 18:40, 21:40 daily |
-| [calls](jobs/calls.md) | A brief before each conversation, the next step after it | 12:20 weekdays |
-| [members](jobs/members.md) | Welcome, next session, who else belongs | 15:10 Monday |
-| [content](jobs/content.md) | Posts, a talk idea, the invitation page | 14:10 Monday, Wednesday, Friday |
-| [report](jobs/report.md) | Seats, what moved, what waits on you | 23:30 daily |
+| **MSP Mastermind** | The one the owner talks to. Plans each agent's day, keeps the owner's one queue, reports the count | Claude Code |
+| **MSP Dream 100** | The hundred people where one yes changes everything: a dossier and one hand-written message each, by email and on socials | Claude Code |
+| **MSP Dream 500** | The wider five hundred, in small waves, each with a true first line | Claude Code |
+| **MSP Partners** | Partners, collaborators and influencers: people who already have the buyers' attention and could promote | Claude Code |
+| **MSP Cold Leads** | The lists every agent orders, and cold email to the rest, ready for the sending tool | Claude Code |
+| **MSP Lead Radar** | People already asking in public for what the owner offers. Reads and scores; hands them on | Codex |
+| **MSP Content** | Posts and videos worth sharing, in the owner's voice | Claude Code |
+| **MSP SpeakerAgent** | Podcasts, events and stages: shows scored, pitches with an angle, follow-up | Codex |
+| **MSP AEO and SEO** | Found in search and named by AI answers: the questions buyers ask, and a page that answers each | Codex |
+| **MSP Sales** | Every conversation after a reply: answers, calls, invitations, follow-up, and the people list as the CRM | Codex |
+
+Each bot only orchestrates. Its routines hand their jobs to the **Claude Code** and **Codex** CLIs (`tools/job.py`), so the work runs on your own subscriptions and not on Grok usage. The team works through one set of files: one people list where each person has one agent, one queue for you, one log of every draft, send and reply.
 
 ## What is in the pack
 
 | | |
 |---|---|
-| [INSTALL.md](INSTALL.md), [CHECKLIST.md](CHECKLIST.md) | The one line; everything only you can do |
-| [playbook/](playbook/) | The voice, the path from a name to a seat, the blank owner.md |
-| [tools/council.py](tools/council.py) | The people list, the stages, what may go out, the export for a cold-email tool, the invitation page |
-| `tools/job.py`, `skills/claude-code-cli/` | Hands every job to Claude Code, then Codex, and counts which engine did it |
-| `guards/`, `convlog/` | The send switch, the opt-out list, the log of every draft, send and reply |
-| `tools/install.py`, `team.py`, `check.py`, `selftest.py` | The installer and the checks |
+| [INSTALL.md](INSTALL.md), [CHECKLIST.md](CHECKLIST.md) | The install line, the update line, everything only you can do |
+| [team.json](team.json), [roles/](roles/), [MASTER-PROMPT.md](MASTER-PROMPT.md), `tools/team.py` | The ten agents, each one's memory, its set-up, hand-overs between them |
+| [jobs/](jobs/) | What each routine's CLI does |
+| [agents/](agents/README.md) | The nine functions: how each works, its prompts and scripts |
+| [playbook/](playbook/) | What each function means here, the voice, the path, the blank owner.md |
+| [tools/people.py](tools/people.py) | The people list: lanes, stages, what may go out, the export, the invitation page |
+| `tools/job.py`, `skills/claude-code-cli/`, `engines/`, `agents.json` | Hands every job to its engine and counts which did it |
+| `guards/`, `convlog/`, `linkedin/` | The send switch, the opt-out list, the log, the LinkedIn path |
+| `tools/install.py`, `update.py`, `check.py`, `selftest.py` | The installer, the update and the checks |

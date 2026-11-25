@@ -1,14 +1,16 @@
 # Job: content
 
-Reasons for an MSP owner to want to know the host.
+Reasons for the right people to want to know the owner.
 
 ## Read first
-- `context/owner.md` (topics, host_bio), `repo/playbook/VOICE.md`, questions people asked (`daily/*/replies.md`, last seven days), `vault/wins.md`.
+- `context/owner.md` (topics, host_bio), `repo/playbook/FUNCTIONS.md` (content), `VOICE.md`; `repo/agents/content/PROCESS.md` and its `prompts/`.
+- `python3 repo/tools/team.py inbox content`, the questions people asked (`daily/*/replies.md`, `daily/*/lead-radar.md`, last seven days), `vault/wins.md`.
 
 ## Do
-1. **One post** for LinkedIn in `content/drafts/<today>-post.md`: one thing the host learned running an MSP, a real question people asked, or a problem owners share. Under 180 words, no link, ends with a real question.
-2. **Mondays: one talk or event** in `content/drafts/<today>-talk.md`: title, three points, who would host it (an association chapter, a vendor community, a podcast), and the note to them as a draft `.item` (TYPE `host_pitch`, shape in `repo/jobs/invite.md`).
-3. **Fridays: the invitation page.** `python3 repo/tools/council.py page`, then read it and note anything owner.md should say better.
+1. **One post** in `content/drafts/<today>-post.md`: something the owner learned, a real question people asked, or a problem they share. Under 180 words, no link, ends with a real question.
+2. **One short video script** in `content/drafts/<today>-video.md`: under 60 seconds, the first line is the point.
+3. **Fridays: the invitation page.** `python3 repo/tools/people.py page`, then read it and note anything owner.md should say better.
+4. `team.py taken <file>` for each inbox item used.
 
 Only facts in owner.md, the wins file or a public page. Nothing about a member or a client without their yes.
 
