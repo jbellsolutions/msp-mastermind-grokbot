@@ -1,0 +1,31 @@
+{
+ "_doc": "The MSP Mastermind bot: one Grok bot that orchestrates, and seven jobs that get people signed up for a mastermind. Each routine hands one job (jobs/<job>.md) to the Claude Code CLI through tools/job.py. tools/team.py, tools/install.py and tools/check.py read this.",
+ "version": "1.0.0",
+ "name": "the MSP Mastermind bot",
+ "workspace": "/workspace/msp-mastermind",
+ "link": "https://github.com/jbellsolutions/msp-mastermind-grokbot/releases/latest/download/msp-mastermind.zip",
+ "secrets": "council.env",
+ "skills": ["claude-code-cli"],
+ "switches": [],
+ "folders": ["context", "daily", "log/jobs", "state", "content/drafts", "vault/Daily", "vault/People", "requests/owner", "requests/sent"],
+ "private_folders": ["data", "data/contacts", "data/inbox", "data/calls", "data/out", ".secrets"],
+ "checks": [["self-test", "tools/selftest.py"]],
+ "first_job": "report",
+ "agents": [
+  {
+   "role": "msp-mastermind",
+   "bot": "MSP Mastermind",
+   "kind": "main",
+   "does": "Fills a mastermind of managed service provider owners: the list, the invitations, the replies, the calls, the members, the posts and the nightly count",
+   "routines": [
+    ["Council list", "10 12 * * 1-5", "Run python3 /workspace/msp-mastermind/repo/tools/job.py run list"],
+    ["Council invitations", "10 13 * * 1-5", "Run python3 /workspace/msp-mastermind/repo/tools/job.py run invite. Then do the send steps in your memory for this routine"],
+    ["Council replies", "40 12,15,18,21 * * *", "First save each new reply from the signed-in mailbox and LinkedIn to /workspace/msp-mastermind/data/inbox/<date>/, one text file per message with FROM and SUBJECT at the top. Then run python3 /workspace/msp-mastermind/repo/tools/job.py run replies. Then do the send steps in your memory for this routine"],
+    ["Council calls", "20 12 * * 1-5", "First save today's and tomorrow's mastermind calls from the signed-in calendar, and any new call notes or transcript, to /workspace/msp-mastermind/data/calls/<date>.md. Then run python3 /workspace/msp-mastermind/repo/tools/job.py run calls. Then do the send steps in your memory for this routine"],
+    ["Council members", "10 15 * * 1", "Run python3 /workspace/msp-mastermind/repo/tools/job.py run members"],
+    ["Council content", "10 14 * * 1,3,5", "Run python3 /workspace/msp-mastermind/repo/tools/job.py run content"],
+    ["Council report", "30 23 * * *", "Run python3 /workspace/msp-mastermind/repo/tools/job.py run report. Then post /workspace/msp-mastermind/daily/<date>/report.md, as it is, to the owner in this chat, and to Slack if it is connected"]
+   ]
+  }
+ ]
+}
